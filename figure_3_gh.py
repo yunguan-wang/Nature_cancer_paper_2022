@@ -117,7 +117,7 @@ for item in geneset.items():
             alpha = 0.75,
             show=False,
             title = titles, 
-            save = 'fig_2g_' + pt_name + '_' + item[0],
+            save = 'fig_3g_' + pt_name + '_' + item[0],
             vmax = vmax
         )
 #%%
@@ -165,5 +165,5 @@ for geneset_key in geneset.keys():
     plt.legend(bbox_to_anchor = (1, 0.5), loc = 'center left')
     plt.title(title)
     plt.tight_layout()
-    plt.savefig(output_folder + '/Figure_2h_{}_violin.pdf'.format(geneset_key))
+    plt.savefig(output_folder + '/Figure_3h_{}_violin.pdf'.format(geneset_key))
 #%%

@@ -67,7 +67,7 @@ adata.obs.to_csv('./results/Cell_annotations_full.csv')
 # ==============================================================================
 # ==============================================================================
 
-# Figure 5 A, B, C
+# Figure 6 A, B, C
 
 conds = [
     ['sgNT-Veh','sgNT-Enz'],
@@ -79,18 +79,18 @@ for c in ['leiden','Sample','phase']:
         sc.pl.umap(
             adata[adata.obs['Sample'].isin(cond)], 
             color=c, 
-            save='Figure_5_abc_{}_'.format(
+            save='Figure_6_abc_{}_'.format(
                 cond[0].split('-')[0].replace('/','_')
                 ) + c, 
             show=False)
 
-# Figure 5 E, G and H.
+# Figure 6 E, G and H.
 for c in ['leiden','Sample','phase']:
     sc.pl.umap(
         adata,
-        color=c, save='Figure_5_egh' + c, show=False, alpha=1)
+        color=c, save='Figure_6_egh' + c, show=False, alpha=1)
 
-# Figure 5F
+# Figure 6F
 colors = pd.Series('',index = adata.obs.leiden_sub.astype(str).unique())
 blues = sns.light_palette('Blue',4).as_hex()[1:3]
 colors[['0','1']] = blues
@@ -112,29 +112,29 @@ sns.scatterplot(
 plt.xlabel('UMAP1')
 plt.ylabel('UMAP2')
 plt.legend(bbox_to_anchor = (1,0.5), loc = 'center left')
-plt.savefig(output_path + '/Figure_5F.pdf', bbox_inches = 'tight')
+plt.savefig(output_path + '/Figure_6F.pdf', bbox_inches = 'tight')
 plt.close()
 
-# Figure S10
+# Figure S10 b to f
 for gene in ['FKBP5', 'NKX3-1', 'PTGER4', 'HERC3', 'GNMT']:
     sc.pl.umap(
         adata,
-        color=gene, save='Figure_S10_{}.pdf'.format(gene), show=False, alpha=1)
+        color=gene, save='Figure_S10_b_to_f{}.pdf'.format(gene), show=False, alpha=1)
 
-# Figure S11
+# Figure S10 g to r
 c4adata = adata[adata.obs.leiden == '4']
 for gene in ['JAK1','JAK2','JAK3','TYK2', 'STAT1','STAT2', 'STAT3', 'IL6', 'IL6R', 'IL6ST']:
     sc.pl.umap(
         c4adata,
-        color=gene, save='Figure_S11_{}.pdf'.format(gene), show=False, alpha=1)
+        color=gene, save='Figure_S10_g_to_r{}.pdf'.format(gene), show=False, alpha=1)
 #%%
 # ==============================================================================
 # ==============================================================================
 # ==============================================================================
 
-# Figure 6
+# Figure 7
 
-# Figure 6a
+# Figure 7a
 # Read genesets related to PCA.
 pc_genes = pd.read_excel(
     'PCA scores alternative.xlsx')
@@ -165,7 +165,7 @@ g = sns.heatmap(
     gene_set_scores,cmap=sns.palettes.color_palette('YlGnBu_r', as_cmap=True))
 plt.xlabel('')
 plt.savefig(
-    output_path + '/Figure 6a.pdf', bbox_inches='tight')
+    output_path + '/Figure 7a.pdf', bbox_inches='tight')
 
 # Figure 6 B and C
 
@@ -175,8 +175,8 @@ cluster_scores = cell_scores.groupby(adata.obs['leiden']).mean()
 sample_scores = cell_scores.groupby(adata.obs['Sample']).mean()
 cluster_scores.loc[:,:] = minmax_scale(cluster_scores, (0.05,1), axis=0)
 sample_scores.loc[:,:] = minmax_scale(sample_scores, (0.05,1), axis=0)
-plot_radar(cluster_scores, palette='tab10', figname=output_path + '/Figure_6b.pdf')
-plot_radar(sample_scores, palette='tab20', figname=output_path + '/Figure_6c.pdf')
+plot_radar(cluster_scores, palette='tab10', figname=output_path + '/Figure_7b.pdf')
+plot_radar(sample_scores, palette='tab20', figname=output_path + '/Figure_7c.pdf')
 
 # Figure 6 d to i.
 for c in ['AR score', 'BASAL', 'Luminal', 'NEPC', 'EMT', 'Stem']:
@@ -188,7 +188,7 @@ for c in ['AR score', 'BASAL', 'Luminal', 'NEPC', 'EMT', 'Stem']:
     _scores = minmax_scale(_scores)
     plot_adata.obs[c] = _scores
     sc.pl.umap(
-        plot_adata, color = c,save='Figure_6d_to_i' + c,
+        plot_adata, color = c,save='Figure_7d_to_i' + c,
         show=False, legend_fontsize = 'large', color_map ='rainbow', s=25, alpha=0.75)
 #%% 
 # ==============================================================================
